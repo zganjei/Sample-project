@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'IranSans';
+    src: url('../fonts/sans.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IranSansBold';
+    src: url('../fonts/IRANSansWeb(FaNum)_Bold.ttf') format('truetype');
+}
+
+*:not(.fa) {
+    font-family: "IranSans", "BYekan", Tahoma, sans-serif !important;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left
+}
+
+.padded-window {
+    padding: 20px;
+}
+
+.btn-link {
+    outline: none;
+}
+
+.btn:not(.btn-xs,.btn-sm) {
+    padding-top: 10px;
+}
+
+i {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.btn-circle i {
+    margin-left: 0px !important;
+}
+
+.table th, .table td {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+
+input[type=submit], input[type=reset], button {
+    padding-top: 9px !important;
+}
+
+.radio label, .checkbox label {
+    padding-right: initial !important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    vertical-align: middle !important;
+}
+
+.btn-link {
+    padding-top: 0px !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/*.select2-container--default .select2-selection--single, .select2-container--default .select2-selection--multiple{*/
+/*margin-bottom: 10px;*/
+/*}*/
+/*.form-control, .single-line{*/
+/*margin-bottom: 10px;*/
+/*}*/
+
+.top-single-button {
+    margin-left: 0 !important;
+    margin-top: 5px !important;
+}
+
+[data-name="md-persiandatetimepicker"] table.table td {
+    padding: 3px 0 !important;
+}
+
+[data-name=md-persiandatetimepicker-switch] {
+    display: none;
+}
+
+.navbar-static-side {
+    width: 250px;
+}
+
+body.rtls #page-wrapper {
+    margin: 0 250px 0 0;
+}
+
+.metismenu .arrow {
+    float: left;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.order-count {
+    width: 50px !important;
+}
+
+.operator-product-details {
+    white-space: pre-line;
+}
+
+.operator-product-image {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
+
+#search-nav {
+    padding: 6px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}

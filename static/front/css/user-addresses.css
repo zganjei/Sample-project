@@ -1,0 +1,54 @@
+#addresses-page {
+    width: 240px;
+    margin: 0 auto;
+}
+
+#addresses-page .map-select {
+    width: 135px;
+    margin: 0 auto;
+    background: url("/static/front/images/map.svg");
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 25px;
+    cursor: pointer;
+    color: black;
+}
+
+#addresses-page .check-box {
+    display: block;
+    width: 240px;
+    min-height: 60px;
+    height: auto;
+    border-radius: 12px;
+    background-color: #eeeeee;
+    padding: 5px 8px;
+    text-align: right;
+    position: relative;
+    word-break: break-word;
+}
+
+#addresses-page .check-box .remove {
+    position: absolute;
+    top: 17px;
+    left: -33px;
+    cursor: pointer;
+    background-image: url("/static/front/images/remove-circle.svg");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+#addresses-page .add-new-address {
+    width: 150px;
+    margin: 0 auto;
+    background: url("/static/front/images/add-circle-black.svg");
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 25px;
+    cursor: pointer;
+}
+
+#add-new-map #map {
+    width: 900px;
+    height: 400px;
+}

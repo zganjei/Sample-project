@@ -1,0 +1,9 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="">
+            <h2 class="col-lg-12 p-lg {% if 'error' in message.tags %}red-bg{% else %}lazur-bg{% endif %}">
+                {{ message }}
+            </h2>
+        </div>
+    {% endfor %}
+{% endif %}

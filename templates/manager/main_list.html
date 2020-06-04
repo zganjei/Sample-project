@@ -1,0 +1,36 @@
+<div id="manager-action-buttons">
+    {% for action in manager.actions %}
+        <button id="action-{{ action.action_name }}"
+                class="btn btn-sm {{ action.css_class }} manager-action m-b-xs" is_view="{{ action.is_view }}" new_tab="{{ action.new_tab }}"
+                is_popup="{{ action.is_popup }}" action_name="{{ action.action_name }}"
+                action_width="{{ action.width }}" action_height="{{ action.height }}" max_count="{{ action.max_count|default:"" }}"
+                min_count="{{ action.min_count|default:"" }}" confirm_message="{{ action.confirm_message|default:"" }}">
+        {% if action.font_awesome_class %}<i class="{{ action.font_awesome_class }}"></i>{% endif %}
+            {{ action.action_verbose_name }}</button>
+    {% endfor %}
+
+</div>
+
+<div class="table-responsive" id="manager-list-container">
+    <table class="table table-striped table-bordered table-hover" id="manager_list" style="width:100%">
+        <thead>
+        <tr>
+            {% for column in manager.columns %}
+                <th>{{ column.column_verbose_name }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+{#        <tfoot>#}
+{#        <tr>#}
+{#            {% for column in manager.columns %}#}
+{#                <th>{{ column.column_verbose_name }}</th>#}
+{#            {% endfor %}#}
+{#        </tr>#}
+{#        </tfoot>#}
+    </table>
+</div>
+
+

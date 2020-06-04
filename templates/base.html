@@ -1,0 +1,170 @@
+{% load account_template_tags static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {#    META TAGS#}
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/front/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/front/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/front/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/front/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/front/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/front/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/front/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/front/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/front/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/front/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/front/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/front/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/front/icons/favicon-16x16.png">
+    <link rel="manifest" href="/static/front/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/static/front/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ff0000">
+    <link rel="shortcut icon" href="/static/front/icons/favicon-32x32.png" type="image/x-icon">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {#	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47408367-6"></script>#}
+    {#	<script>#}
+    {#	  window.dataLayer = window.dataLayer || [];#}
+    {#	  function gtag(){dataLayer.push(arguments);}#}
+    {#	  gtag('js', new Date());#}
+    {##}
+    {#	  gtag('config', 'UA-47408367-6');#}
+    {#	</script>#}
+
+    <title>
+        {% block title %}
+            کاپدیا
+        {% endblock %}
+    </title>
+
+
+    {% block CSS %}
+        {% include "manager/static_css.html" %}
+    {% endblock %}
+
+
+
+
+    {% block JS %}
+        {% include "manager/static_js.html" %}
+    {% endblock %}
+
+</head>
+
+<body class="rtls">
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+
+
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                                                <img alt="image" class="img-circle" src="/static/images/user.png"
+                                                     width="48"
+                                                     height="48">
+                                                 </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                                    <span class="clear"> <span class="block m-t-xs"> <strong
+                                                            class="font-bold">{{ user.first_name }} {{ user.last_name }}</strong>
+                                                     </span> <span
+                                                            class="text-muted text-xs block">  <b
+                                                            class="caret"></b></span> </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="{% url 'account:profile' %}">پروفایل</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'account:logout' %}?next={% url 'account:admin_dashboard' %}">خروج</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        کاپدیا
+
+                    </div>
+                </li>
+
+
+                <li class="{% if 'add_post' == current_url_name %}active{% endif %}">
+                    <a href="{% url 'post:add_post' %}"><i class="fa fa-pencil"></i>
+                        <span class="nav-label">افزودن پست</span>
+                    </a>
+                </li>
+
+                <li class="{% if 'posts' == current_url_name %}active{% endif %}">
+                    <a href="/admin/posts"><i class="fa fa-pencil-square-o"></i>
+                        <span class="nav-label">مدیریت پست ها</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                            class="fa fa-bars top-single-button"></i>
+                    </a>
+                    <form role="search" class="navbar-form-custom" method="post" action="#">
+                        <div class="form-group">
+                            <h3 class="form-control-static m-t m-r">کاپدیا</h3>
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    {#                    {% if user|has_inbox_permission %}#}
+                    {#                        <li>#}
+                    {#                            <a class="dropdown-toggle count-info" href="{% url 'inbox' %}">#}
+                    {#                                <i class="fa fa-envelope"></i>#}
+                    {#                                {% get_unread_messages_count as unread_messages_count %}#}
+                    {#                                {% if unread_messages_count %}#}
+                    {#                                    <span class="label label-warning">{{ unread_messages_count }}</span>#}
+                    {#                                {% endif %}#}
+                    {#                            </a>#}
+                    {#                        </li>#}
+                    {#                    {% endif %}#}
+                    <li>
+                        <a href="{% url 'account:logout' %}?next={% url 'account:admin_dashboard' %}">
+                            خروج
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        {#fadeInRight#}
+        <div class="wrapper wrapper-content animated ">
+            {% block content %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center m-t-lg">
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+
+    </div>
+</div>
+
+
+{% include 'messages_alertify.html' %}
+
+</body>
+</html>

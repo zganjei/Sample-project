@@ -1,0 +1,26 @@
+{% if manager.filter_form %}
+    <div>
+        <form class="filter-form form-horizontal" role="form">
+            {% if manager.get_filter_form_content %}
+                {{ manager.get_compiled_filter_form_content|safe }}
+            {% else %}
+                <div class="row">
+                    {% for field in manager.filter_form %}
+                        <div class="col-sm-4 form-group">
+                            <label class="col-lg-4 control-label">
+                                {{ field.label }}:
+                            </label>
+                            <div class="col-lg-8">{{ field }}</div>
+                        </div>
+                        {% cycle '' '' '</div> <div class="row">' %}
+                    {% endfor %}
+                    <div class="col-sm-12 form-group text-left" style="">
+                        <input type="reset" value="بازنشانی" class="filter-reset btn btn-white">
+                        <input type="submit" value="جستجو" class="filter-submit btn btn-warning">
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+{% endif %}

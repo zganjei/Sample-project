@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load bootstrap3 account_template_tags %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block JS %}
+    {{ block.super }}
+    <script type="text/javascript" src="/static/lib/jquery.formset.min.js"></script>
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+    <article class="wrapper-content  animated fadeInRight">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h4 class="col-sm-6">
+                            {{ title }}
+                        </h4>
+                    </div>
+                    <div class="ibox-content">
+
+                        {% block before_form %}
+
+                        {% endblock %}
+
+                        <form action="" method="post" enctype="multipart/form-data" id="action-form"
+                              class="form action-form">
+                            {% csrf_token %}
+
+                            {% if form %}
+                                {% bootstrap_form form %}
+                            {% endif %}
+
+
+
+                            <div class="button_holder">
+                                <button type="submit" name="register-submit" class="btn btn-primary">
+                                    ثبت
+                                </button>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+{% endblock %}

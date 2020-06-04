@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="{% static 'libs/d3js/d3.min.js' %}"></script>
+
+    <title>Hello World</title>
+    <style>
+        text {
+            font-family: sans-serif;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<svg width="1000" height="700"></svg>
+<script src="{% static 'graph/make_rect_graph.js' %}"></script>
+
+</body>
+</html>

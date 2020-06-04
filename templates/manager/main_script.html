@@ -1,0 +1,286 @@
+<script type="text/javascript">
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                // Only send the token to relative URLs i.e. locally.
+                xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+            }
+        }
+    });
+
+
+    var $manager = $("#manager_list");
+    var $managerTable = $manager.DataTable({
+        pageLength: 10,
+        order: [],
+        responsive: true,
+        scrollX: false,
+        searching: false,
+        dom: "<'data-table-btn' B>" +
+            {#        "<'row'<'col-sm-6'f>>" +#}
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-3'i><'col-sm-6'p><'col-sm-3'l>>",
+        {#        dom: '<"html5buttons"B>lTfgitp',#}
+        buttons: [
+            {% if manager.excel_export %}
+                {
+                    text: 'خروجی اکسل',
+                    title: 'خروجی اکسل',
+                    label: 'خروجی اکسل',
+                    action: function (e, dt, node, config) {
+                        let new_url = '{{ manager.action_url }}?t=excel';
+                        let serialize_form = $('.filter-form').serialize();
+                        new_url = new_url + '&' + serialize_form;
+                        window.location.href = new_url;
+                    }
+                }
+            {% endif %}
+        ],
+        language: {
+            "url": "/static/inspinia/js/plugins/dataTables/Persian.json"
+        },
+        {#        buttons: [#}
+        {#            {extend: 'copy'},#}
+        {#            {extend: 'csv'},#}
+        {#            {extend: 'excel', title: '{{ manager.manager_name }}_export'},#}
+        {#                        {extend: 'pdf', title: 'ExampleFile'},#}
+        {##}
+        {#            {#}
+        {#                extend: 'print',#}
+        {#                customize: function (win) {#}
+        {#                    $(win.document.body).addClass('white-bg');#}
+        {#                    $(win.document.body).css('font-size', '10px');#}
+        {##}
+        {#                    $(win.document.body).find('table')#}
+        {#                        .addClass('compact')#}
+        {#                        .css('font-size', 'inherit');#}
+        {#                }#}
+        {#            }#}
+        {#        ],#}
+        "serverSide": true,
+        "ajax": "{{ manager.action_url }}?t=json" + "{{ manager.extra_params|default:''|safe }}",
+
+        "columns": [
+            {% for column in manager.columns %}
+                {
+                    "data": "{{ column.column_name }}",
+                    "className": "{{ column.css_class|default:'' }}",
+                    "visible":{{ column.visible|yesno:'true,false' }}
+                }
+                {% if not forloop.last %}
+                    ,
+                {% endif %}
+            {% endfor %}
+        ],
+        "createdRow": function (row, data, index) {
+            if (data.css_class) {
+                $(row).addClass(data.css_class);
+            }
+        },
+        "rowCallback": function (row, data) {
+            if ($.inArray(data.DT_RowId, selected) !== -1) {
+                $(row).addClass('selected');
+            }
+        },
+        "fnDrawCallback": function (settings, json) {
+            updateFancybox();
+            if ($manager.find('tbody tr').length === 1) {
+                if ($manager.find('tbody tr').find('.dataTables_empty').length === 0) {
+                    $manager.find('tbody tr').trigger('click');
+                    {% if manager.action_after_search %}
+                        if (searchSubmittedProcess) {
+                            searchSubmittedProcess = false;
+                            $('#action-{{ manager.action_after_search }}').trigger('click');
+                        }
+                    {% endif %}
+                }
+            }
+
+
+        }
+    });
+    $('#manager_list_filter').hide();
+
+    let selected = [];
+    $manager.find('tbody').on('click', 'tr', function () {
+        {% if manager.multi_select %}
+            let id = this.id;
+            let index = $.inArray(id, selected);
+
+            if (index === -1) {
+                selected.push(id);
+            } else {
+                selected.splice(index, 1);
+            }
+            $(this).toggleClass('selected');
+        {% else %}
+            let id = this.id;
+            let index = $.inArray(id, selected);
+            if (index === -1) {
+                selected = [id];
+            } else {
+                selected = [];
+            }
+            $manager.find('tbody tr').not(this).removeClass('selected');
+            $(this).toggleClass('selected');
+        {% endif %}
+    });
+
+
+    function reloadGridItems() {
+        let new_url = '{{ manager.action_url }}?t=json' + "{{ manager.extra_params|default:''|safe }}";
+        let serialize_form = $('.filter-form').serialize();
+        new_url = new_url + '&' + serialize_form;
+
+        $managerTable.ajax.url(new_url);
+        $managerTable.ajax.reload(null, false);
+
+        $manager.find('tbody tr.selected').removeClass('selected');
+        selected = [];
+    }
+
+    let searchSubmittedProcess = false;
+    $('.filter-submit').click(function () {
+        searchSubmittedProcess = true;
+        reloadGridItems();
+        return false;
+    });
+
+    $('.filter-form').submit(function (e) {
+        searchSubmittedProcess = true;
+        reloadGridItems();
+        e.preventDefault();
+        return false;
+    });
+
+
+    $('.manager-action').click(function (e) {
+
+        var selected_items = selected;
+        var name = $(this).attr('action_name');
+        var is_view = $(this).attr('is_view');
+        var is_popup = $(this).attr('is_popup');
+        var new_tab = $(this).attr('new_tab');
+        var width = $(this).attr('action_width');
+        var height = $(this).attr('action_height');
+        var min_count = $(this).attr('min_count');
+        var max_count = $(this).attr('max_count');
+
+        var confirm_message = $(this).attr('confirm_message') || 'از انجام این عملیات اطمینان دارید؟';
+
+        if (min_count && selected_items < parseInt(min_count)) {
+            alert('لطفا حداقل' + min_count + ' مورد را انتخاب کنید.');
+            e.stopImmediatePropagation();
+            return false;
+        }
+
+        if (max_count) {
+            if (selected_items.length > parseInt(max_count)) {
+                alert('لطفا حداکثر' + max_count + ' مورد را انتخاب کنید.');
+                e.stopImmediatePropagation();
+                return false;
+            }
+        }
+
+        var url = "{{ manager.action_url }}?t=action&n=" + name + "&i=" + selected_items + "{{ manager.extra_params|default:''|safe }}";
+
+        if (is_view == 'False') {
+            if (confirm(confirm_message))
+                $.ajax({
+                    url: url, method: 'POST',
+                    success: function (result) {
+                        reloadGridItems();
+
+                        $(result).each(function (i, item) {
+                            notify(item.tags, item.message)
+                        });
+
+                    }
+                });
+        } else {
+            if (new_tab == 'False' && is_popup == 'True') {
+                $.fancybox.open({
+                    src: url,
+                    type: 'iframe',
+                    opts: {
+                        afterLoad: function (instance, current) {
+                            $(document).resize();
+                        },
+                        clickOutside: null,
+                        clickSlide: null,
+                        toolbar: false,
+                        smallBtn: true,
+                        iframe: {
+                            css: {
+                                width: width + 'px'
+                            }
+                        },
+                        afterClose: function () {
+                            {% if manager.action_after_search %}
+                                $('.filter-form .filter-reset').trigger('click');
+                            {% endif %}
+                            reloadGridItems();
+                        }
+                    }
+                });
+                {#                $('#action-' + name).attr('href', url);#}
+                {##}
+                {#                $('#action-' + name).fancybox({#}
+                {#                    helpers: {#}
+                {#                        overlay: {#}
+                {#                            css: {#}
+                {#                                'background': 'rgba(194,194,194, 0.5)',#}
+                {#                                'overflow': 'auto'#}
+                {#                            }#}
+                {#                        }#}
+                {#                    },#}
+                {#                    padding: 0,#}
+                {#                    afterClose: function () {#}
+                {#                        reloadGridItems();#}
+                {#                    },#}
+                {#                    minHeight: height,#}
+                {#                    width: width#}
+                {#                });#}
+                return true;
+            } else {
+                if (new_tab == 'True')
+                    window.open(url, '_blank');
+                else
+                    window.location.href = url;
+            }
+            e.stopImmediatePropagation();
+            return true;
+        }
+        e.stopImmediatePropagation();
+        return false;
+    });
+
+    $(document).on('click', '.fancybox-close', function () {
+        reloadGridItems();
+    });
+
+    {#    $(document).ready(function () {#}
+    {#        $('.manager-action').each(function () {#}
+    {#            var name = $(this).attr('action_name');#}
+    {#            $('#action-' + name).fancybox();#}
+    {#        });#}
+    {#    });#}
+
+    setInterval(() => reloadGridItems(),30000);
+</script>

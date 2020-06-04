@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="action-html">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {#    <link rel="shortcut icon" href="/static/front/icon/favicon-32x32.png" type="image/x-icon">#}
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {#	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47408367-6"></script>#}
+    {#	<script>#}
+    {#	  window.dataLayer = window.dataLayer || [];#}
+    {#	  function gtag(){dataLayer.push(arguments);}#}
+    {#	  gtag('js', new Date());#}
+    {##}
+    {#	  gtag('config', 'UA-47408367-6');#}
+    {#	</script>#}
+
+    {% include "manager/static_css.html" %}
+    {% block CSS %}
+    {% endblock %}
+
+
+    {% include "manager/static_js.html" %}
+    {% block JS %}
+    {% endblock %}
+
+</head>
+
+{% block body %}
+    <body class="white-bg rtls">
+
+    <div class=" animated fadeInDown">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    </body>
+{% endblock %}
+
+</html>

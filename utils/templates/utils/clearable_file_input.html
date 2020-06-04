@@ -1,0 +1,20 @@
+<div class="form-control-file">
+    {% if widget.is_initial %}
+        {{ widget.initial_text }}:
+        <a href="{{ widget.value.url }}" target="_blank"><img width="80px" src="{{ widget.value.url }}"/></a>
+        <br/>
+        {% if not widget.required %}
+            <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"/>
+            <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+        {% endif %}
+        <br/>
+        <div class="change-label">{{ widget.input_text }}:</div>
+    {% endif %}
+    <label class="input-label">
+        انتخاب فایل ...
+        <input type="{{ widget.type }}" name="{{ widget.name }}"
+{#                {% include "django/forms/widgets/attrs.html" %} #}
+        />
+    </label>
+    <div class="file-name"></div>
+</div>

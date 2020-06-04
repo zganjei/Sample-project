@@ -1,0 +1,151 @@
+#submenu {
+    margin-bottom: 24px !important;
+}
+
+#orders-page {
+    width: 710px;
+    margin: 0 auto;
+}
+
+#orders-page .order-box {
+    display: table;
+    width: 100%;
+    height: 60px;
+    border-radius: 16px;
+    background-color: #eeeeee;
+    position: relative;
+    margin-top: 16px;
+    padding: 18px 8px;
+    overflow: hidden;
+}
+
+#orders-page .order-box .order-main {
+    display: table;
+    width: 100%;
+}
+
+#orders-page .order-box .date {
+    margin-right: 48px;
+}
+
+#orders-page .order-box .item-arrow {
+    margin-left: 8px;
+    background: url("/static/front/images/arrowdown.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    cursor: pointer;
+}
+
+#orders-page .order-box.open {
+    height: auto;
+}
+
+#orders-page .order-box.open .item-arrow {
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+#orders-page .order-box.open .order-details {
+    display: block !important;
+}
+
+#orders-page .order-item {
+    display: table;
+    width: 100%;
+    margin-top: 8px;
+    height: 93px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    padding: 8px;
+}
+
+#orders-page .order-item .product-image {
+    border-radius: 12px;
+    background-color: #ffffff;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    display: block;
+    margin-left: 8px;
+}
+
+#orders-page .order-item .product-info {
+    margin-right: 8px;
+    width: 210px;
+    text-align: right;
+}
+
+#orders-page .order-item .price {
+    margin-top: 30px;
+    margin-right: 40px;
+    margin-left: 20px;
+}
+
+#orders-page .order-item .count-text {
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+#orders-page .total-price {
+    margin: 8px;
+}
+
+#orders-page .reorder-btn {
+    width: 120px;
+    height: 32px;
+    background-color: #2196f3;
+    border-radius: 16px;
+    color: white;
+    margin-top: 3px;
+}
+
+#orders-page .order-flow .line {
+    width: 100%;
+    height: 2px;
+    background-color: #424242;
+    margin-top: 13px;
+}
+
+#orders-page .order-flow .steps {
+    margin: 0;
+    font-size: 10px;
+    color: #9e9e9e;
+}
+
+#orders-page .order-flow .steps div {
+    padding: 0;
+}
+
+#orders-page .order-flow .steps div:before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #ffffff;
+    border: solid 2px #424242;
+    border-radius: 50%;
+    margin-top: -9px;
+    margin-bottom: 5px;
+}
+
+#orders-page .order-flow .steps div.active:before {
+    background-color: #2196f3;
+}
+
+#orders-page .order-flow .steps .first:before {
+
+}
+
+#orders-page .order-flow .steps .second:before {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#orders-page .order-flow .steps .third:before {
+    margin-right: auto;
+}

@@ -1,0 +1,30 @@
+#cart-detail-page {
+    width: 270px;
+    margin: 0 auto;
+}
+
+#cart-detail-page .map-select {
+    width: 135px;
+    margin: 0 auto;
+    background: url("/static/front/images/map.svg");
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 25px;
+    cursor: pointer;
+    color: black;
+}
+
+#cart-detail-page .add-new-address {
+    width: 150px;
+    margin: 0 auto;
+    background: url("/static/front/images/add-circle-black.svg");
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 25px;
+    cursor: pointer;
+}
+
+#add-new-map #map {
+    width: 900px;
+    height: 400px;
+}

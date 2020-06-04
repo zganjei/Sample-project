@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>پست بگذارید</title>
+    {#    <script>#}
+    {{ testForm.media }}
+    {#    </script>#}
+    {#    <script src="{% static 'lib/ckeditor5-classic/ckeditor.js' %}"></script>#}
+    {#    <script src="{% static 'lib/ckeditor5-classic/translations/fa.js' %}"></script>#}
+    {#    <script type="text/javascript" src="{% static "ckeditor/ckeditor/plugins/language/lang/fa.js" %}"></script>#}
+    {#    <script type="text/javascript" src="{% static "ckeditor/ckeditor/lang/fa.js" %}"></script>#}
+    <script type="text/javascript" src="{% static "inspinia/js/jquery-3.1.1.min.js" %}"></script>
+    <style>
+        body {
+            font-family: "B Nazanin";
+        }
+
+        .mention {
+            direction: rtl;
+            text-align: right;
+            color: blue;
+            font-family: "B Nazanin";
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+<h1 style="direction: rtl">پست خود را قرار دهید</h1>
+
+<div id="editor">
+    <p>سلام. این یک متن است</p>
+</div>
+<div>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ testForm.description }}
+    </form>
+</div>
+<script type="text/javascript" src="{% static "graph/render_post.js" %}"></script>
+{#<script type="text/javascript">#}
+
+
+{#textArea = document.getElementById("id_description");#}
+{#CKEDITOR.add(textArea);#}
+{#console.log(CKEDITOR.instances);#}
+{#console.log(CKEDITOR.instances.description)#}
+
+
+{#</script>#}
+{#<script>#}
+{##}
+{#ClassicEditor#}
+{#    .create(document.querySelector('#editor'), {#}
+{#        alignment: {#}
+{#            options: ['left', 'right']#}
+{#        },#}
+{#        toolbar: [#}
+{#            'heading', '|', 'bulletedList', 'numberedList', 'alignment', 'undo', 'redo'#}
+{#        ]#}
+{#    })#}
+{#    .catch(error => {#}
+{#        console.error(error);#}
+{#    });#}
+{##}
+{#    ClassicEditor#}
+{#        .create(document.querySelector('#editor'), {#}
+{#            language: 'fa',#}
+{#            toolbar: ['heading', '|', 'alignment:right', 'alignment:center', 'alignment:left', 'alignment:justify',#}
+{#                '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',#}
+{#                'code', 'subscript', 'superscript', 'highlight', '|',#}
+{#                'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',#}
+{#                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',#}
+{#                'insertTable',],#}
+{#            image: {#}
+{#                'toolbar': ['imageTextAlternative', 'imageTitle', '|', 'imageStyle:alignLeft', 'imageStyle:full',#}
+{#                    'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|'],#}
+{#                'styles': [#}
+{#                    'full',#}
+{#                    'side',#}
+{#                    'alignLeft',#}
+{#                    'alignRight',#}
+{#                    'alignCenter',#}
+{#                ]#}
+{##}
+{#            },#}
+{#            table: {#}
+{#                'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells']#}
+{#            },#}
+{#            heading: {#}
+{#                'options': [#}
+{#                    {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},#}
+{#                    {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},#}
+{#                    {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},#}
+{#                    {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'}#}
+{#                ]#}
+{#            }#}
+{#        })#}
+{#        .then(editor => {#}
+{#            console.log(editor);#}
+{#        })#}
+{#        .catch(error => {#}
+{#            console.error(error);#}
+{#        });#}
+{#</script>#}
+
+
+</body>
+</html>

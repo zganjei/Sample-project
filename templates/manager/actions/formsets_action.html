@@ -1,0 +1,48 @@
+{% extends 'manager/actions/add_edit.html' %}
+{% load bootstrap3 account_template_tags %}
+
+
+{% block content %}
+    {% if not success %}
+        {% include 'messages_alertify.html' with top=True %}
+
+        <div class="ibox-content">
+            <form action="" method="post" enctype="multipart/form-data" id="action-form" class="form action-form">
+                {% csrf_token %}
+
+                {% block after_main %}
+                    <div id="formset_div">
+                        {% for formset_item in formset_mapper %}
+                            {% include 'manager/actions/formset.html' with legend=formset_item.title formset=formset_item.formset_obj %}
+                        {% endfor %}
+                    </div>
+                {% endblock %}
+
+                {% buttons %}
+                    {% block submit %}
+                        <div class="button_holder">
+                            <button type="submit" name="register-submit" class="btn btn-primary">
+
+                                ثبت
+                            </button>
+                        </div>
+                    {% endblock %}
+                {% endbuttons %}
+
+                {% block after_submit %}
+                {% endblock %}
+
+            </form>
+
+        </div>
+
+    {% else %}
+        <script>
+            window.parent.reloadGridItems();
+            {% for message in messages %}
+                window.parent.notify("{{ message.tags }}", "{{ message }}");
+            {% endfor %}
+            window.parent.$.fancybox.close();
+        </script>
+    {% endif %}
+{% endblock %}

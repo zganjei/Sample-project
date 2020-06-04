@@ -1,0 +1,162 @@
+{% load account_template_tags date_template_tags %}
+
+<hr class="hr-line-dashed"/>
+
+<fieldset class="formset_fieldset">
+
+    <div class="row">
+        <div class="col-sm-12 m-t-lg font-bold m-b">
+            {{ legend }}{% if required %}<span class="required_field">*</span>{% endif %}
+        </div>
+    </div>
+
+    <div id="{{ formset.prefix }}_formset">
+        <input type="hidden" name="formset_prefix" value="{{ formset.prefix }}">
+
+        <div class="formset_container">
+
+            <table id="{{ formset.prefix }}_table" class="table table-striped">
+                <thead>
+                <tr>
+                    {% for field in formset.forms.0 %}
+                        {% if field.name != 'DELETE' %}
+                            <td class="label_td"{% if field.field.widget.is_hidden %}
+                                style="display: none"{% endif %}>
+                                <span>{{ field.label }}    </span>
+                                {#                                {% if field.field.required %}#}
+                                {#                                    <span class="required_field">*#}
+                                {#                                        </span>#}
+                                {#                                {% endif %}#}
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </thead>
+                {% for form in formset.forms %}
+                    <tr>
+                        {% for field in form %}
+                            {% if field.field.widget.input_type == 'hidden' %}
+                                <td class="input_td hidden{% if field.errors %} error_td{% endif %}">
+                                    {{ field }}
+                                </td>
+                            {% else %}
+                                <td class="input_td{% if field.errors %} error_td{% endif %}">
+                                    {% if field.name != 'DELETE' %}
+                                        {% if formset.readonly and field.field.widget.input_type == 'text' %}
+                                            <p>{{ field.value|pdate_if_date }}</p>
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
+                                    {% else %}
+                                        <input type="hidden" name="{{ field.html_name }}" id="{{ field.auto_id }}">
+                                    {% endif %}
+                                    {% if field.errors %}
+                                        <br/>{{ field.errors }}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                        <td class="delete_formset_td"></td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+            {{ formset.management_form }}
+            {% if not formset.readonly %}
+                <script type="text/javascript">
+                    $(function () {
+                        var $formset_tr = $('#' + '{{ formset.prefix }}' + '_table tbody tr');
+                        $formset_tr.formset({
+                            prefix: '{{ formset.prefix }}',
+                            formCssClass: 'dynamic-formset-{{ formset.prefix }}',
+                            addText: 'افزودن',
+                            deleteText: '',
+                            added: function check_date_picker() {
+
+
+                                var $formset_tr = $('#' + '{{ formset.prefix }}' + '_table tbody tr');
+
+                                var $date_fields = $formset_tr.find('[data-mdpersiandatetimepicker]');
+                                $date_fields.each(function () {
+                                    $(this).MdPersianDateTimePicker({
+                                        Placement: 'bottom',
+                                        Trigger: 'click',
+                                        TargetSelector: $(this).attr('id'),
+                                        EnableTimePicker: false,
+                                        Disabled: false,
+                                        Format: 'yyyy/MM/dd',
+                                        ToDate: false,
+                                        FromDate: false,
+                                        IsGregorian: false,
+                                        EnglishNumber: false
+                                    });
+                                });
+
+
+                                $formset_tr.find('[data-form-control="time"]').each(function () {
+                                    var input = $(this);
+                                    input.datetimepicker('destroy');
+                                    input.datetimepicker({
+                                        format: input.data('date-format'),
+                                        datepicker: false,
+                                        timepicker: true,
+                                        mask: false,
+                                        scrollInput: false,
+                                        step: 30,
+                                        lang: input.data('lang')
+                                    });
+                                });
+
+                                $formset_tr.find('input[type=text], select').attr('data-prompt-position', 'topLeft:-100');
+                                {% if formset.prefix != 'resume' %}
+                                    $formset_tr.each(function () {
+                                        var all_fields_name = [];
+                                        $(this).find('input[type=text], select').each(function () {
+                                            all_fields_name.push($(this).attr('id'));
+                                        });
+                                        $(this).find('input[type=text], select').each(function () {
+                                        });
+                                    });
+                                {% endif %}
+
+                                $formset_tr.find('.delete-row').addClass('btn btn-xs btn-danger btn-circle').each(function () {
+                                    if ($(this).find('.fa').length === 0)
+                                        $(this).prepend('<i class="fa fa-times"></i>');
+                                });
+
+
+                                updateFancybox();
+
+                            }
+
+                        });
+
+                        $formset_tr.find('input[type=text], select').attr('data-prompt-position', 'topLeft:-100');
+
+                        $('.add-row').addClass('btn btn-outline btn-success btn-xs m-t m-b').each(function () {
+                            if ($(this).find('.fa').length === 0)
+                                $(this).prepend('<i class="fa fa-plus"></i>');
+                        });
+
+                        $('.delete-row').addClass('btn btn-xs btn-danger btn-circle').each(function () {
+                            if ($(this).find('.fa').length === 0)
+                                $(this).prepend('<i class="fa fa-times"></i>');
+                        });
+
+                        {% if formset.prefix != 'resume' %}
+                            $formset_tr.each(function () {
+                                var all_fields_name = [];
+                                $(this).find('input[type=text], select').each(function () {
+                                    all_fields_name.push($(this).attr('id'));
+                                });
+                                $(this).find('input[type=text], select').each(function () {
+                                });
+                            });
+                        {% endif %}
+                    });
+                </script>
+            {% endif %}
+        </div>
+
+    </div>
+</fieldset>

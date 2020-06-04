@@ -1,0 +1,9 @@
+{% extends 'manager/actions/add_edit.html' %}
+
+{% block after_main %}
+    <div id="formset_div">
+        {% for formset_item in formset_mapper %}
+            {% include 'manager/actions/formset.html' with legend=formset_item.title formset=formset_item.formset_obj %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'no_base.html' %}
+
+{% block title %}
+    مدیریت |
+    {{ manager.manager_verbose_name }}
+{% endblock %}
+
+{% block CSS %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block body %}
+    <body class="white-bg">
+
+    <article class="wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h4>
+                            {{ manager.manager_verbose_name }}
+                        </h4>
+                    </div>
+                    <div class="ibox-content">
+
+
+                        {% include 'manager/filter.html' %}
+
+
+                        <p>
+
+                        </p>
+
+                        {% include 'manager/main_list.html' %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    </body>
+
+    {% include 'manager/main_script.html' %}
+
+{% endblock %}

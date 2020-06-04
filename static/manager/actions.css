@@ -1,0 +1,25 @@
+
+.even-tr {
+    background-color: ghostwhite;
+}
+
+.odd-tr {
+    background-color: rgb(252, 252, 250);
+}
+
+.header-tr {
+    background-color: rgb(230, 230, 230);
+}
+
+.action-pre {
+    font-family: "BYekan", tahoma, sans-serif;
+    font-size: 14px;
+}
+
+.input_td input[type="text"], .input_td input[type="password"], .input_td input[type="email"], .input_td input[type="url"], .input_td select, textarea {
+    width: 60% !important;
+}
+
+.red {
+    color: indianred;
+}

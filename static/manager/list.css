@@ -1,0 +1,225 @@
+#gbox_manager_list {
+    font-family: "BYekan", tahoma, sans-serif !important;
+}
+
+.ui-jqgrid .ui-jqgrid-htable th div {
+    padding: 4px 0;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.filter-formset table, .filter-formset table tr td {
+    text-align: right;
+    font-size: 12px;
+}
+
+.filter-formset table {
+    font-size: 10px;
+}
+
+.ui-jqgrid tr.ui-row-rtl td {
+    padding: 4px;
+    text-overflow: ellipsis;
+}
+
+.ui-jqgrid .ui-userdata {
+    height: 35px;
+    background: rgb(255, 255, 255);
+    border: 0;
+    padding: 2px;
+}
+
+#next_manager_pager {
+    padding-right: 22px;
+}
+
+.ui-jqgrid .ui-pg-button span.ui-separator {
+    display: none;
+}
+
+.ui-pg-selbox {
+    width: inherit;
+}
+
+.manager-action .ui-button-text {
+    padding: 0 12px;
+    font-size: 15px;
+}
+
+.ui-jqgrid .ui-pg-input {
+    padding: 10px 6px;
+}
+
+.ui-button-text-only .ui-button-text {
+    padding: 0.1em 1em;
+}
+
+input.ui-button {
+    padding: 0.1em 1em;
+}
+
+.ui-jqgrid .ui-jqgrid-hbox-rtl {
+    float: none;
+}
+
+.ui-th-rtl, .ui-jqgrid .ui-jqgrid-htable th.ui-th-rtl {
+    text-align: center;
+}
+
+.manager-excel {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-left: 3px;
+    background: url('/static/manager/images/excel.png');
+}
+
+/*DATATABLE OVERRIDE*/
+div.dataTables_wrapper {
+    direction: rtl;
+}
+
+table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child {
+    border-left-width: 0;
+    /*border-right-width: 1px;*/
+}
+
+table.dataTable tbody tr {
+    cursor: pointer;
+}
+
+table.dataTable tbody tr.selected, table.dataTable tbody tr.selected td {
+    background-color: #deebf8 !important;
+    color: black !important;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    clear: both;
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+    text-align: center;
+}
+
+html.action-html, html.action-html body {
+    height: auto !important;
+}
+
+html.action-html {
+    overflow: hidden;
+}
+
+.pagination > li > a, .pagination > li > span {
+    float: right !important;
+}
+
+#manager-list-container {
+    overflow: visible;
+    position: relative;
+}
+
+#manager-list-container .data-table-btn {
+    position: absolute;
+    top: -39px;
+    left: 0;
+}
+
+#manager-action-buttons {
+    margin-left: 105px;
+}
+
+#manager-list-container table.dataTable {
+    margin-top: 0 !important;
+}
+
+/*MAP WIDGET*/
+.mw-coordinates-overlay {
+    width: 200px !important;
+}
+
+/*BOOTSTRAP OVERRIDE*/
+.form-control-file {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    padding: 6px 12px;
+    width: 100%;
+}
+
+.form-control-file .change-label {
+    display: inline-block;
+}
+
+.form-control-file input[type=file] {
+    display: inline-block;
+    width: 60px;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.form-control-file .input-label {
+    width: 130px;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    cursor: pointer;
+    background: #1a7bb9;
+    color: white;
+    font-weight: normal;
+}
+
+.form-control-file .input-label:hover {
+    opacity: 0.9;
+}
+
+.form-control-file .file-name {
+    display: inline-block;
+    width: auto;
+}
+
+.form-control-file img {
+    width: 80px;
+}
+
+.formset_container .form-control-file img {
+    width: 50px;
+}
+
+.label-warning, .badge-warning {
+    padding-top: 5px;
+    padding-bottom: 1px;
+}
+
+.select2-container {
+    z-index: 2222;
+}
+
+/*MAP*/
+#map {
+    width: 100% !important;
+}
+
+/*.cedarmaps-logo-true {*/
+/*display: none !important;*/
+/*}*/
+
+/*CKEDITOR*/
+.django-ckeditor-widget {
+    display: block !important;
+    min-height: 380px;
+}
+
+/*FANCYBOX*/
+.fancybox-slide--iframe .fancybox-content {
+    min-height: 60%;
+}
+
+

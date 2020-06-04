@@ -1,0 +1,14 @@
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            {% if top %}
+                alertify.set('notifier', 'position', 'top-right');
+            {% endif %}
+            {% if 'error' in message.tags %}
+                alertify.error("{{ message }}");
+            {% else %}
+                alertify.success("{{ message }}");
+            {% endif %}
+        </script>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/base/favicon.ico?v=2" type="image/x-icon">
+
+    <title>کاپدیا | ورود</title>
+
+
+    <link href="/static/inspinia/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/inspinia/css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="/static/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- TOASTR -->
+    <link href="/static/inspinia/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <link href="/static/inspinia/css/animate.css" rel="stylesheet">
+    <link href="/static/inspinia/css/style.css" rel="stylesheet">
+
+    <link href="/static/base/base.css?v={{ SITE_VERSION }}" rel="stylesheet">
+    <link href="/static/inspinia/css/login.css?v={{ SITE_VERSION }}" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {#	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47408367-6"></script>#}
+    {#	<script>#}
+    {#	  window.dataLayer = window.dataLayer || [];#}
+    {#	  function gtag(){dataLayer.push(arguments);}#}
+    {#	  gtag('js', new Date());#}
+    {##}
+    {#	  gtag('config', 'UA-47408367-6');#}
+    {#	</script>#}
+
+</head>
+
+<body class="gray-bg rtls">
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+
+            <h1 class="logo-name">KPEDIA</h1>
+
+        </div>
+        <h3>به کاپدیا خوش آمدید</h3>
+
+        <p>
+        </p>
+
+        <p>وارد شوید</p>
+
+        <form class="m-t" role="form" action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="نام کاربری" required="" name="username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="رمز عبور" required="" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-primary block full-width m-b">ورود</button>
+
+            {#            <a href="{% url 'forget' %}">#}
+            {#                <small>آیا رمز عبور خود را فراموش کرده اید؟</small>#}
+            {#            </a>#}
+            {#            <p class="text-muted text-center">#}
+            {#                <small>آیا حساب کاربری ندارید؟</small>#}
+            {#            </p>#}
+            {#            <a class="btn btn-sm btn-white btn-block" href="{% url 'signup' %}">ثبت نام در نی‌نی‌پی</a>#}
+
+        </form>
+        <p class="m-t">
+            <small>کاپدیا &copy; 2018</small>
+        </p>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="/static/inspinia/js/jquery-3.1.1.min.js"></script>
+<script src="/static/inspinia/js/bootstrap.min.js"></script>
+{#TOASTR#}
+<script src="/static/inspinia/js/plugins/toastr/toastr.min.js"></script>
+
+<!-- iCheck -->
+<script src="/static/inspinia/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+
+
+{% include 'messages_toastr.html' %}
+
+
+</body>
+
+</html>
