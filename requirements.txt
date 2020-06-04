@@ -1,6 +1,6 @@
 xlrd
 -i https://pypi.org/simple
-django==2.2.5
+django==2.2.10
 gunicorn==19.9.0
 pytz==2019.2
 sqlparse==0.3.0
