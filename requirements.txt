@@ -3,7 +3,7 @@ xlrd
 django==2.2.5
 gunicorn==19.9.0
 pytz==2019.2
-sqlparse==0.3.0
+sqlparse==0.4.4
 django-bootstrap3
 django_select2==6.0.3
 mysqlclient
